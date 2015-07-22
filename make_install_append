@@ -1,0 +1,4 @@
+install -d -m 755 %{buildroot}/usr/share/defaults/swift
+for i in proxy-server account-server container-server object-server container-reconciler object-expirer swift; do
+install -p -D -m 644 etc/${i}.conf-sample %{buildroot}/usr/share/defaults/swift/${i}.conf
+done

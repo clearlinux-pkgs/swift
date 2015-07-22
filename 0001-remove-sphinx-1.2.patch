@@ -1,0 +1,25 @@
+From fba8b7596b2aa5b6ef18adbe27e191f2adce32a0 Mon Sep 17 00:00:00 2001
+From: Alberto Murillo <alberto.murillo.silva@intel.com>
+Date: Wed, 2 Sep 2015 15:40:28 -0500
+Subject: [PATCH] remove sphinx<1.2
+
+---
+ test-requirements.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/test-requirements.txt b/test-requirements.txt
+index 73ca508..0ec4bff 100644
+--- a/test-requirements.txt
++++ b/test-requirements.txt
+@@ -9,7 +9,7 @@ nose
+ nosexcover
+ nosehtmloutput
+ oslosphinx
+-sphinx>=1.1.2,<1.2
++sphinx>=1.1.2
+ mock>=1.0
+ python-swiftclient
+ python-keystoneclient>=1.3.0
+-- 
+2.1.0
+

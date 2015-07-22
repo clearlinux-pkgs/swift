@@ -1,0 +1,4 @@
+Z /etc/swift/* 0640 root swift
+z /etc/swift 0750 root swift
+d /var/cache/swift - swift swift - -
+d /var/log/swift - swift swift - -
