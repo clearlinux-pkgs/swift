@@ -4,7 +4,7 @@
 #
 Name     : swift
 Version  : 2.4.0
-Release  : 5
+Release  : 6
 URL      : http://tarballs.openstack.org/swift/swift-2.4.0.tar.gz
 Source0  : http://tarballs.openstack.org/swift/swift-2.4.0.tar.gz
 Source1  : swift-account-auditor.service
@@ -121,7 +121,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 py.test-2.7 --verbose || :
 %install
 rm -rf %{buildroot}
-python2 setup.py build -b py2 install --root=%{buildroot}
+python2 -tt setup.py build -b py2 install --root=%{buildroot}
 mkdir -p %{buildroot}/usr/lib/systemd/system
 install -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/swift-account-auditor.service
 install -m 0644 %{SOURCE2} %{buildroot}/usr/lib/systemd/system/swift-account-reaper.service
