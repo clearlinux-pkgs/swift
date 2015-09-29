@@ -4,7 +4,7 @@
 #
 Name     : swift
 Version  : 2.4.0
-Release  : 6
+Release  : 7
 URL      : http://tarballs.openstack.org/swift/swift-2.4.0.tar.gz
 Source0  : http://tarballs.openstack.org/swift/swift-2.4.0.tar.gz
 Source1  : swift-account-auditor.service
