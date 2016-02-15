@@ -4,7 +4,7 @@
 #
 Name     : swift
 Version  : 2.5.0
-Release  : 8
+Release  : 9
 URL      : http://tarballs.openstack.org/swift/swift-2.5.0.tar.gz
 Source0  : http://tarballs.openstack.org/swift/swift-2.5.0.tar.gz
 Source1  : swift-account-auditor.service
