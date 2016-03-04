@@ -4,7 +4,7 @@
 #
 Name     : swift
 Version  : 2.5.0
-Release  : 9
+Release  : 10
 URL      : http://tarballs.openstack.org/swift/swift-2.5.0.tar.gz
 Source0  : http://tarballs.openstack.org/swift/swift-2.5.0.tar.gz
 Source1  : swift-account-auditor.service
@@ -33,6 +33,7 @@ BuildRequires : cffi
 BuildRequires : eventlet
 BuildRequires : funcsigs
 BuildRequires : iso8601
+BuildRequires : netaddr
 BuildRequires : netifaces
 BuildRequires : nose
 BuildRequires : oslo.config
@@ -50,7 +51,8 @@ BuildRequires : setuptools
 BuildRequires : simplejson
 BuildRequires : six
 BuildRequires : xattr
-Patch1: 0001-remove-sphinx-1.2.patch
+Patch1: cve-2016-0738.patch
+Patch2: 0001-remove-sphinx-1.2.patch
 
 %description
 rebuild the .mo with msgfmt (included with GNU gettext)
@@ -95,6 +97,7 @@ python components for the swift package.
 %prep
 %setup -q -n swift-2.5.0
 %patch1 -p1
+%patch2 -p1
 
 %build
 python2 setup.py build -b py2
