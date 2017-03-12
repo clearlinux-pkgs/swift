@@ -1,20 +1,2 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
-six
-eventlet
-netifaces
-python-mock
-python-swiftclient
-nose
-oslo.log
-pyeclib
-funcsigs
-xattr
-oslo.config
-simplejson
-cffi
-oslo.utils
-pycparser
-oslo.serialization
-iso8601
-PasteDeploy
