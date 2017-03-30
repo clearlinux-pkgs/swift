@@ -21,12 +21,14 @@ Mock Version: 1.2.14
 INFO: Mock Version: 1.2.14
 WARNING: For multilib systems, both architectures of nosync library need to be installed
 Start: yum update
+Start: Waiting for yumcache lock
+Finish: Waiting for yumcache lock
 Finish: yum update
 Finish: chroot init
 Start: buildsrpm
 Start: rpmbuild -bs
 Finish: rpmbuild -bs
 Finish: buildsrpm
-INFO: Done(swift.spec) Config(clear) 0 minutes 38 seconds
+INFO: Done(swift.spec) Config(clear) 0 minutes 22 seconds
 INFO: Results and/or logs in: results/
 Finish: run

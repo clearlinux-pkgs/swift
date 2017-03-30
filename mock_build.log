@@ -3,7 +3,7 @@ Start: init plugins
 INFO: selinux disabled
 Finish: init plugins
 Start: run
-INFO: Start(results/swift-2.10.0-17.src.rpm)  Config(clear)
+INFO: Start(results/swift-2.13.0-18.src.rpm)  Config(clear)
 Start: clean chroot
 Finish: clean chroot
 Start: chroot init
@@ -19,14 +19,16 @@ Mock Version: 1.2.14
 INFO: Mock Version: 1.2.14
 WARNING: For multilib systems, both architectures of nosync library need to be installed
 Start: yum update
+Start: Waiting for yumcache lock
+Finish: Waiting for yumcache lock
 Finish: yum update
 Finish: chroot init
-Start: build phase for swift-2.10.0-17.src.rpm
-Start: build setup for swift-2.10.0-17.src.rpm
-Finish: build setup for swift-2.10.0-17.src.rpm
-Start: rpmbuild swift-2.10.0-17.src.rpm
-Finish: rpmbuild swift-2.10.0-17.src.rpm
-Finish: build phase for swift-2.10.0-17.src.rpm
-INFO: Done(results/swift-2.10.0-17.src.rpm) Config(clear) 0 minutes 59 seconds
+Start: build phase for swift-2.13.0-18.src.rpm
+Start: build setup for swift-2.13.0-18.src.rpm
+Finish: build setup for swift-2.13.0-18.src.rpm
+Start: rpmbuild swift-2.13.0-18.src.rpm
+Finish: rpmbuild swift-2.13.0-18.src.rpm
+Finish: build phase for swift-2.13.0-18.src.rpm
+INFO: Done(results/swift-2.13.0-18.src.rpm) Config(clear) 0 minutes 29 seconds
 INFO: Results and/or logs in: results/
 Finish: run
