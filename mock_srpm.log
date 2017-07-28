@@ -14,17 +14,17 @@ Finish: unpacking root cache
 INFO: enabled yum cache
 Start: cleaning yum metadata
 Finish: cleaning yum metadata
-INFO: enabled ccache
 Mock Version: 1.2.14
 INFO: Mock Version: 1.2.14
-WARNING: For multilib systems, both architectures of nosync library need to be installed
 Start: yum update
 Finish: yum update
+Start: Waiting for rootcache lock
+Finish: Waiting for rootcache lock
 Finish: chroot init
 Start: buildsrpm
 Start: rpmbuild -bs
 Finish: rpmbuild -bs
 Finish: buildsrpm
-INFO: Done(swift.spec) Config(clear) 0 minutes 6 seconds
+INFO: Done(swift.spec) Config(clear) 0 minutes 18 seconds
 INFO: Results and/or logs in: results/
 Finish: run

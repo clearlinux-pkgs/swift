@@ -5,10 +5,10 @@
 # Source0 file verified with key 0xEB6CCA1483FA74EC (infra-root@openstack.org)
 #
 Name     : swift
-Version  : 2.14.0
-Release  : 19
-URL      : http://tarballs.openstack.org/swift/swift-2.14.0.tar.gz
-Source0  : http://tarballs.openstack.org/swift/swift-2.14.0.tar.gz
+Version  : 2.15.0
+Release  : 20
+URL      : http://tarballs.openstack.org/swift/swift-2.15.0.tar.gz
+Source0  : http://tarballs.openstack.org/swift/swift-2.15.0.tar.gz
 Source1  : swift-account-auditor.service
 Source2  : swift-account-reaper.service
 Source3  : swift-account-replicator.service
@@ -23,7 +23,7 @@ Source11  : swift-object-updater.service
 Source12  : swift-object.service
 Source13  : swift-proxy.service
 Source14  : swift.tmpfiles
-Source99 : http://tarballs.openstack.org/swift/swift-2.14.0.tar.gz.asc
+Source99 : http://tarballs.openstack.org/swift/swift-2.15.0.tar.gz.asc
 Summary  : OpenStack Object Storage
 Group    : Development/Tools
 License  : Apache-2.0
@@ -38,6 +38,8 @@ Requires: greenlet
 Requires: netifaces
 Requires: six
 Requires: xattr
+BuildRequires : configparser-python
+BuildRequires : enum34-python
 BuildRequires : pbr
 BuildRequires : pip
 BuildRequires : python-dev
@@ -45,8 +47,8 @@ BuildRequires : python3-dev
 BuildRequires : setuptools
 
 %description
-rebuild the .mo with msgfmt (included with GNU gettext)
-msgfmt eo.po
+Team and repository tags
+        ========================
 
 %package bin
 Summary: bin components for the swift package.
@@ -83,14 +85,14 @@ python components for the swift package.
 
 
 %prep
-%setup -q -n swift-2.14.0
+%setup -q -n swift-2.15.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1494269780
+export SOURCE_DATE_EPOCH=1501240417
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
@@ -100,7 +102,7 @@ export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 py.test-2.7 --verbose || :
 %install
-export SOURCE_DATE_EPOCH=1494269780
+export SOURCE_DATE_EPOCH=1501240417
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
@@ -159,6 +161,7 @@ done
 /usr/bin/swift-object-expirer
 /usr/bin/swift-object-info
 /usr/bin/swift-object-reconstructor
+/usr/bin/swift-object-relinker
 /usr/bin/swift-object-replicator
 /usr/bin/swift-object-server
 /usr/bin/swift-object-updater
