@@ -6,7 +6,7 @@
 #
 Name     : swift
 Version  : 2.18.0
-Release  : 21
+Release  : 22
 URL      : http://tarballs.openstack.org/swift/swift-2.18.0.tar.gz
 Source0  : http://tarballs.openstack.org/swift/swift-2.18.0.tar.gz
 Source1  : swift-account-auditor.service
@@ -49,9 +49,12 @@ Requires: keystonemiddleware
 Requires: lxml
 Requires: netifaces
 Requires: nose
+Requires: nosexcover
 Requires: openstackdocstheme
+Requires: os-api-ref
 Requires: os-testr
 Requires: oslo.config
+Requires: pyeclib
 Requires: python-keystoneclient
 Requires: python-mock
 Requires: python-openstackclient
@@ -63,9 +66,6 @@ Requires: six
 Requires: xattr
 BuildRequires : buildreq-distutils3
 BuildRequires : pbr
-BuildRequires : pip
-BuildRequires : python3-dev
-BuildRequires : setuptools
 
 %description
 Team and repository tags
@@ -132,7 +132,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532382896
+export SOURCE_DATE_EPOCH=1533876733
 python3 setup.py build -b py3
 
 %check
@@ -164,12 +164,12 @@ install -m 0644 %{SOURCE12} %{buildroot}/usr/lib/systemd/system/swift-object.ser
 install -m 0644 %{SOURCE13} %{buildroot}/usr/lib/systemd/system/swift-proxy.service
 mkdir -p %{buildroot}/usr/lib/tmpfiles.d
 install -m 0644 %{SOURCE14} %{buildroot}/usr/lib/tmpfiles.d/swift.conf
-## make_install_append content
+## install_append content
 install -d -m 755 %{buildroot}/usr/share/defaults/swift
 for i in proxy-server account-server container-server object-server container-reconciler object-expirer swift; do
 install -p -D -m 644 etc/${i}.conf-sample %{buildroot}/usr/share/defaults/swift/${i}.conf
 done
-## make_install_append end
+## install_append end
 
 %files
 %defattr(-,root,root,-)
