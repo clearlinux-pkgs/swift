@@ -5,10 +5,10 @@
 # Source0 file verified with key 0xC36CDCB4DF00C68C (infra-root@openstack.org)
 #
 Name     : swift
-Version  : 2.18.0
-Release  : 22
-URL      : http://tarballs.openstack.org/swift/swift-2.18.0.tar.gz
-Source0  : http://tarballs.openstack.org/swift/swift-2.18.0.tar.gz
+Version  : 2.19.0
+Release  : 23
+URL      : http://tarballs.openstack.org/swift/swift-2.19.0.tar.gz
+Source0  : http://tarballs.openstack.org/swift/swift-2.19.0.tar.gz
 Source1  : swift-account-auditor.service
 Source2  : swift-account-reaper.service
 Source3  : swift-account-replicator.service
@@ -23,7 +23,7 @@ Source11  : swift-object-updater.service
 Source12  : swift-object.service
 Source13  : swift-proxy.service
 Source14  : swift.tmpfiles
-Source99 : http://tarballs.openstack.org/swift/swift-2.18.0.tar.gz.asc
+Source99 : http://tarballs.openstack.org/swift/swift-2.19.0.tar.gz.asc
 Summary  : OpenStack Object Storage
 Group    : Development/Tools
 License  : Apache-2.0
@@ -41,10 +41,12 @@ Requires: castellan
 Requires: coverage
 Requires: cryptography
 Requires: dnspython
+Requires: docutils
 Requires: eventlet
 Requires: fixtures
 Requires: greenlet
 Requires: hacking
+Requires: ipaddress
 Requires: keystonemiddleware
 Requires: lxml
 Requires: netifaces
@@ -65,7 +67,9 @@ Requires: requests-mock
 Requires: six
 Requires: xattr
 BuildRequires : buildreq-distutils3
+BuildRequires : netifaces
 BuildRequires : pbr
+BuildRequires : pytest
 
 %description
 Team and repository tags
@@ -125,21 +129,21 @@ python3 components for the swift package.
 
 
 %prep
-%setup -q -n swift-2.18.0
+%setup -q -n swift-2.19.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1533876733
+export SOURCE_DATE_EPOCH=1534932384
 python3 setup.py build -b py3
 
 %check
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-py.test-2.7 --verbose || :
+py.test --verbose || :
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/swift
@@ -214,6 +218,7 @@ done
 /usr/bin/swift-reconciler-enqueue
 /usr/bin/swift-ring-builder
 /usr/bin/swift-ring-builder-analyzer
+/usr/bin/swift-ring-composer
 
 %files config
 %defattr(-,root,root,-)
