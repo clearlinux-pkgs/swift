@@ -6,7 +6,7 @@
 #
 Name     : swift
 Version  : 2.19.0
-Release  : 23
+Release  : 24
 URL      : http://tarballs.openstack.org/swift/swift-2.19.0.tar.gz
 Source0  : http://tarballs.openstack.org/swift/swift-2.19.0.tar.gz
 Source1  : swift-account-auditor.service
@@ -27,43 +27,30 @@ Source99 : http://tarballs.openstack.org/swift/swift-2.19.0.tar.gz.asc
 Summary  : OpenStack Object Storage
 Group    : Development/Tools
 License  : Apache-2.0
-Requires: swift-bin
-Requires: swift-python3
-Requires: swift-config
-Requires: swift-data
-Requires: swift-license
-Requires: swift-python
+Requires: swift-bin = %{version}-%{release}
+Requires: swift-config = %{version}-%{release}
+Requires: swift-data = %{version}-%{release}
+Requires: swift-license = %{version}-%{release}
+Requires: swift-python = %{version}-%{release}
+Requires: swift-python3 = %{version}-%{release}
+Requires: swift-services = %{version}-%{release}
 Requires: PasteDeploy
 Requires: Sphinx
-Requires: bandit
-Requires: boto
 Requires: castellan
-Requires: coverage
 Requires: cryptography
 Requires: dnspython
-Requires: docutils
 Requires: eventlet
-Requires: fixtures
 Requires: greenlet
-Requires: hacking
 Requires: ipaddress
 Requires: keystonemiddleware
 Requires: lxml
 Requires: netifaces
-Requires: nose
-Requires: nosexcover
 Requires: openstackdocstheme
 Requires: os-api-ref
-Requires: os-testr
 Requires: oslo.config
 Requires: pyeclib
-Requires: python-keystoneclient
-Requires: python-mock
-Requires: python-openstackclient
-Requires: python-swiftclient
 Requires: reno
 Requires: requests
-Requires: requests-mock
 Requires: six
 Requires: xattr
 BuildRequires : buildreq-distutils3
@@ -78,9 +65,10 @@ Team and repository tags
 %package bin
 Summary: bin components for the swift package.
 Group: Binaries
-Requires: swift-data
-Requires: swift-config
-Requires: swift-license
+Requires: swift-data = %{version}-%{release}
+Requires: swift-config = %{version}-%{release}
+Requires: swift-license = %{version}-%{release}
+Requires: swift-services = %{version}-%{release}
 
 %description bin
 bin components for the swift package.
@@ -113,7 +101,7 @@ license components for the swift package.
 %package python
 Summary: python components for the swift package.
 Group: Default
-Requires: swift-python3
+Requires: swift-python3 = %{version}-%{release}
 
 %description python
 python components for the swift package.
@@ -128,6 +116,14 @@ Requires: python3-core
 python3 components for the swift package.
 
 
+%package services
+Summary: services components for the swift package.
+Group: Systemd services
+
+%description services
+services components for the swift package.
+
+
 %prep
 %setup -q -n swift-2.19.0
 
@@ -136,8 +132,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1534932384
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1541279810
+python3 setup.py build
 
 %check
 export http_proxy=http://127.0.0.1:9/
@@ -146,9 +142,9 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 py.test --verbose || :
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/swift
-cp LICENSE %{buildroot}/usr/share/doc/swift/LICENSE
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/swift
+cp LICENSE %{buildroot}/usr/share/package-licenses/swift/LICENSE
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -222,19 +218,6 @@ done
 
 %files config
 %defattr(-,root,root,-)
-/usr/lib/systemd/system/swift-account-auditor.service
-/usr/lib/systemd/system/swift-account-reaper.service
-/usr/lib/systemd/system/swift-account-replicator.service
-/usr/lib/systemd/system/swift-account.service
-/usr/lib/systemd/system/swift-container-auditor.service
-/usr/lib/systemd/system/swift-container-replicator.service
-/usr/lib/systemd/system/swift-container-updater.service
-/usr/lib/systemd/system/swift-container.service
-/usr/lib/systemd/system/swift-object-auditor.service
-/usr/lib/systemd/system/swift-object-replicator.service
-/usr/lib/systemd/system/swift-object-updater.service
-/usr/lib/systemd/system/swift-object.service
-/usr/lib/systemd/system/swift-proxy.service
 /usr/lib/tmpfiles.d/swift.conf
 
 %files data
@@ -248,8 +231,8 @@ done
 /usr/share/defaults/swift/swift.conf
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/swift/LICENSE
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/swift/LICENSE
 
 %files python
 %defattr(-,root,root,-)
@@ -257,3 +240,19 @@ done
 %files python3
 %defattr(-,root,root,-)
 /usr/lib/python3*/*
+
+%files services
+%defattr(-,root,root,-)
+/usr/lib/systemd/system/swift-account-auditor.service
+/usr/lib/systemd/system/swift-account-reaper.service
+/usr/lib/systemd/system/swift-account-replicator.service
+/usr/lib/systemd/system/swift-account.service
+/usr/lib/systemd/system/swift-container-auditor.service
+/usr/lib/systemd/system/swift-container-replicator.service
+/usr/lib/systemd/system/swift-container-updater.service
+/usr/lib/systemd/system/swift-container.service
+/usr/lib/systemd/system/swift-object-auditor.service
+/usr/lib/systemd/system/swift-object-replicator.service
+/usr/lib/systemd/system/swift-object-updater.service
+/usr/lib/systemd/system/swift-object.service
+/usr/lib/systemd/system/swift-proxy.service
