@@ -6,7 +6,7 @@
 #
 Name     : swift
 Version  : 2.20.0
-Release  : 26
+Release  : 27
 URL      : http://tarballs.openstack.org/swift/swift-2.20.0.tar.gz
 Source0  : http://tarballs.openstack.org/swift/swift-2.20.0.tar.gz
 Source1  : swift-account-auditor.service
@@ -24,7 +24,7 @@ Source12  : swift-object.service
 Source13  : swift-proxy.service
 Source14  : swift.tmpfiles
 Source99 : http://tarballs.openstack.org/swift/swift-2.20.0.tar.gz.asc
-Summary  : OpenStack Object Storage
+Summary  : The Swift programming language compiler and tools
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: swift-bin = %{version}-%{release}
@@ -35,7 +35,6 @@ Requires: swift-python = %{version}-%{release}
 Requires: swift-python3 = %{version}-%{release}
 Requires: swift-services = %{version}-%{release}
 Requires: PasteDeploy
-Requires: Sphinx
 Requires: castellan
 Requires: cryptography
 Requires: dnspython
@@ -45,22 +44,19 @@ Requires: ipaddress
 Requires: keystonemiddleware
 Requires: lxml
 Requires: netifaces
-Requires: openstackdocstheme
-Requires: os-api-ref
 Requires: oslo.config
 Requires: pyeclib
-Requires: python-keystoneclient
-Requires: reno
 Requires: requests
 Requires: six
 Requires: xattr
 BuildRequires : buildreq-distutils3
+BuildRequires : netifaces
 BuildRequires : pbr
 BuildRequires : pytest
 
 %description
-Team and repository tags
-        ========================
+rebuild the .mo with msgfmt (included with GNU gettext)
+msgfmt eo.po
 
 %package bin
 Summary: bin components for the swift package.
@@ -132,7 +128,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1545507055
+export SOURCE_DATE_EPOCH=1551039241
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
