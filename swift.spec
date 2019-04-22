@@ -5,10 +5,10 @@
 # Source0 file verified with key 0x1A541148054E9E38 (infra-root@openstack.org)
 #
 Name     : swift
-Version  : 2.20.0
-Release  : 28
-URL      : http://tarballs.openstack.org/swift/swift-2.20.0.tar.gz
-Source0  : http://tarballs.openstack.org/swift/swift-2.20.0.tar.gz
+Version  : 2.21.0
+Release  : 29
+URL      : http://tarballs.openstack.org/swift/swift-2.21.0.tar.gz
+Source0  : http://tarballs.openstack.org/swift/swift-2.21.0.tar.gz
 Source1  : swift-account-auditor.service
 Source2  : swift-account-reaper.service
 Source3  : swift-account-replicator.service
@@ -23,7 +23,7 @@ Source11  : swift-object-updater.service
 Source12  : swift-object.service
 Source13  : swift-proxy.service
 Source14  : swift.tmpfiles
-Source99 : http://tarballs.openstack.org/swift/swift-2.20.0.tar.gz.asc
+Source99 : http://tarballs.openstack.org/swift/swift-2.21.0.tar.gz.asc
 Summary  : The Swift programming language compiler and tools
 Group    : Development/Tools
 License  : Apache-2.0
@@ -50,13 +50,19 @@ Requires: requests
 Requires: six
 Requires: xattr
 BuildRequires : buildreq-distutils3
+BuildRequires : eventlet
 BuildRequires : netifaces
+BuildRequires : nose
 BuildRequires : pbr
 BuildRequires : pytest
+BuildRequires : python-mock
 
 %description
-rebuild the .mo with msgfmt (included with GNU gettext)
-msgfmt eo.po
+========================
+Team and repository tags
+========================
+.. image:: https://governance.openstack.org/tc/badges/swift.svg
+:target: https://governance.openstack.org/tc/reference/tags/index.html
 
 %package bin
 Summary: bin components for the swift package.
@@ -121,14 +127,14 @@ services components for the swift package.
 
 
 %prep
-%setup -q -n swift-2.20.0
+%setup -q -n swift-2.21.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1551039241
+export SOURCE_DATE_EPOCH=1555947633
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
@@ -138,6 +144,7 @@ export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 py.test --verbose || :
 %install
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/swift
 cp LICENSE %{buildroot}/usr/share/package-licenses/swift/LICENSE

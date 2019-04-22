@@ -1,3 +1,6 @@
-2.20.0
+2.21.0
+eventlet
 netifaces
+nose
 pytest
+python-mock
